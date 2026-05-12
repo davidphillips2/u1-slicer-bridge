@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>u1-slicer-bridge-db</Name>
+  <Repository>postgres:16-alpine</Repository>
+  <Registry>https://hub.docker.com/_/postgres/</Registry>
+  <Network>u1-slicer-bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/davidphillips2/u1-slicer-bridge</Support>
+  <Project>https://github.com/taylormadearmy/u1-slicer-bridge</Project>
+  <Overview>PostgreSQL database for U1 Slicer Bridge. Must be started before the API container.</Overview>
+  <Category>Productivity:</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/davidphillips2/u1-slicer-bridge/master/templates/u1-slicer-bridge-db.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/taylormadearmy/u1-slicer-bridge/master/templates/icon.png</Icon>
+
+  <Config Name="Postgres User" Target="POSTGRES_USER" Default="u1slicer" Description="Database username" Type="Variable" Display="always" Required="true" Mask="false">u1slicer</Config>
+  <Config Name="Postgres Password" Target="POSTGRES_PASSWORD" Default="u1slicer" Description="Database password" Type="Variable" Display="always" Required="true" Mask="true">u1slicer</Config>
+  <Config Name="Postgres DB" Target="POSTGRES_DB" Default="u1slicer" Description="Database name" Type="Variable" Display="always" Required="true" Mask="false">u1slicer</Config>
+  <Config Name="Data Storage" Target="/var/lib/postgresql/data" Default="/mnt/user/appdata/u1-slicer-bridge/db" Description="Database data directory" Type="Path" Display="always" Required="true" Mode="rw">/mnt/user/appdata/u1-slicer-bridge/db</Config>
+  <Config Name="Port" Target="5432" Default="5432" Description="Database port (internal only, no host port mapping needed)" Type="Port" Display="always" Required="true" Mode="tcp">5432</Config>
+</Container>

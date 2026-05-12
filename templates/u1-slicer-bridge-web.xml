@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>u1-slicer-bridge-web</Name>
+  <Repository>ghcr.io/davidphillips2/u1-slicer-bridge-web</Repository>
+  <Registry>https://github.com/davidphillips2/u1-slicer-bridge/pkgs/container/u1-slicer-bridge-web</Registry>
+  <Network>u1-slicer-bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/davidphillips2/u1-slicer-bridge</Support>
+  <Project>https://github.com/taylormadearmy/u1-slicer-bridge</Project>
+  <Overview>Web frontend for U1 Slicer Bridge. Nginx serving Alpine.js UI. Requires the API container to be running. Access via the Web UI port.</Overview>
+  <Category>Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:8234]</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/davidphillips2/u1-slicer-bridge/master/templates/u1-slicer-bridge-web.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/taylormadearmy/u1-slicer-bridge/master/templates/icon.png</Icon>
+
+  <Config Name="Web Port" Target="80" Default="8234" Description="Web UI port" Type="Port" Display="always" Required="true" Mode="tcp">8234</Config>
+</Container>

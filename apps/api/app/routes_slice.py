@@ -1644,7 +1644,7 @@ async def slice_upload(upload_id: int, request: SliceRequest):
             overrides["sparse_infill_density"] = f"{request.infill_density}%"
         if request.wall_count != 3:
             overrides["wall_loops"] = str(request.wall_count)
-        if request.infill_pattern and request.infill_pattern != "gyroid":
+        if request.infill_pattern:
             overrides["sparse_infill_pattern"] = request.infill_pattern
         if request.supports:
             overrides["enable_support"] = "1"
@@ -2465,7 +2465,7 @@ async def slice_plate(upload_id: int, request: SlicePlateRequest):
             overrides["sparse_infill_density"] = f"{request.infill_density}%"
         if request.wall_count != 3:
             overrides["wall_loops"] = str(request.wall_count)
-        if request.infill_pattern and request.infill_pattern != "gyroid":
+        if request.infill_pattern:
             overrides["sparse_infill_pattern"] = request.infill_pattern
         if request.supports:
             overrides["enable_support"] = "1"

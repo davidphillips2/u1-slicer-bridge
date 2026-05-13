@@ -453,8 +453,9 @@ function app() {
                     return;
                 }
 
-                const slots = (this.printerFilamentSlots || []).filter((slot) => slot && slot.color && slot.loaded !== false);
-                if (slots.length === 0) {
+                const allSlots = this.printerFilamentSlots || [];
+                const hasAnyLoaded = allSlots.some((slot) => slot && slot.loaded);
+                if (!hasAnyLoaded) {
                     this.presetMessage = 'No filament detected on printer.';
                     this.presetMessageOk = false;
                     return;
@@ -462,7 +463,7 @@ function app() {
 
                 const preview = [];
                 for (let i = 0; i < this.maxExtruders; i++) {
-                    const printerSlot = i < slots.length ? slots[i] : null;
+                    const printerSlot = i < allSlots.length ? allSlots[i] : null;
                     const preset = this.extruderPresets[i];
                     const currentFilament = preset.filament_id
                         ? (this.filaments || []).find(f => f.id === Number(preset.filament_id))
@@ -474,16 +475,16 @@ function app() {
                     preview.push({
                         slotIndex: i,
                         label: `E${i + 1}`,
-                        hasFilament: !!printerSlot,
+                        hasFilament: !!(printerSlot && printerSlot.loaded),
                         currentColor: preset.color_hex || '#FFFFFF',
-                        newColor: printerSlot ? printerSlot.color : null,
-                        colorChanged: printerSlot ? (preset.color_hex || '#FFFFFF').toUpperCase() !== (printerSlot.color || '').toUpperCase() : false,
+                        newColor: printerSlot && printerSlot.loaded ? printerSlot.color : null,
+                        colorChanged: printerSlot && printerSlot.loaded ? (preset.color_hex || '#FFFFFF').toUpperCase() !== (printerSlot.color || '').toUpperCase() : false,
                         currentFilamentId: preset.filament_id || null,
                         currentFilamentName: currentFilament ? currentFilament.name : null,
                         matchedFilament: match ? { id: match.id, name: match.name } : null,
                         profileChanged: match ? match.id !== Number(preset.filament_id) : false,
-                        printerMaterial: printerSlot ? printerSlot.material_type : null,
-                        printerManufacturer: printerSlot ? printerSlot.manufacturer : null,
+                        printerMaterial: printerSlot && printerSlot.loaded ? printerSlot.material_type : null,
+                        printerManufacturer: printerSlot && printerSlot.loaded ? printerSlot.manufacturer : null,
                     });
                 }
 

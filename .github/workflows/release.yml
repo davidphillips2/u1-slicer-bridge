@@ -13,7 +13,7 @@ env:
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write
       packages: write
@@ -76,7 +76,7 @@ jobs:
 
   create-release:
     needs: build-and-push
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: write
 
